@@ -1,0 +1,40 @@
+<root main_tree_to_execute = "MainTree" >
+
+<BehaviorTree ID="MainTree">
+        <Sequence name="root_sequence">
+            <WaitForGuiEvent   name="wait_for_gui_event" />
+            <StartContainer name="start_container" out_containerID="{containerID}"/> 
+            <UpdateGui name="update_gui" param_containerID="{containerID}" param_processID="{processID}"/>  
+            <WaitForGuiEvent name="wait_for_gui_event" /> <!--start process event -->
+            
+            <Parallel failure_threshold="1" success_threshold="2">
+               <StartProcess name="start_process" param_containerID="{containerID}" out_processID="{processID}"/>
+              <StartProcess name="start_process" param_containerID="{containerID}" out_processID="{processID}"/>  
+               <!-- multiple start process -->
+            </Parallel>
+            
+            <UpdateGui name="update_gui" param_containerID="{containerID}" param_processID="{processID}"/> 
+           
+           <Parallel failure_threshold="1" success_threshold="2"> 
+             <!-- multiple stop process and stop container-->
+            <Sequence>
+               <Timeout msec="30000" >
+                <WaitForGuiEvent name="wait_for_gui_event" /> <!--stop process event -->
+               </Timeout> 
+                <StopProcess name="stop_process" param_containerID="{containerID}" param_processID="{processID}" out_processID="{processID}"/> 
+                <UpdateGui name="update_gui" param_containerID="{containerID}" param_processID="{processID}" /> 
+            </Sequence>
+            
+            <Sequence>
+              <Timeout msec="300000">
+                <WaitForGuiEvent name="wait_for_gui_event" /> <!--stop container event-->
+               </Timeout> 
+                <StopContainer name="stop_container" param_containerID="{containerID}" out_containerID="{containerID}"/> 
+               <UpdateGui name="update_gui" param_containerID="{containerID}" param_processID="{processID}"/> 
+            </Sequence>            
+         </Parallel>
+            
+        </Sequence>
+     </BehaviorTree>
+     
+ </root>

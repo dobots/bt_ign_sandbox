@@ -1,0 +1,11 @@
+<root>
+    <TreeNodesModel>
+        <Action ID="StartContainer"/>
+        <Action ID="StartProcess"/>
+        <Action ID="StopContainer"/>
+        <Action ID="StopProcess"/>
+        <Action ID="UpdateGui"/>
+        <Action ID="WaitForGuiEvent"/>
+    </TreeNodesModel>
+</root>
+

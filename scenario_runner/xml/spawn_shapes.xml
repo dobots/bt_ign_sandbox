@@ -1,0 +1,9 @@
+<root main_tree_to_execute = "MainTree" >
+
+<BehaviorTree ID="MainTree">
+        <Sequence name="root_sequence">
+            <SpawnModel   name="spawn_model" model_name="cylinder" x="rand" y="rand" z="rand" R="rand" P="rand" Y="rand" file_path="/user_data/ros_ws/src/behaviortrees_asimovo/scenario_runner/sdf/cylinder_model.sdf" />           
+        </Sequence>
+     </BehaviorTree>
+     
+ </root>
