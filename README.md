@@ -1,37 +1,32 @@
-# bt_ign_sandbox
 
+# Connect behavior trees with new Gazebo
 
+1. Commands to start the simulation in Asimovo:  
+  ```
+   source /opt/ros/galactic/setup.bash
+  ign gazebo -s shapes.sdf -v 4
+   ``` 
 
-Command: 
-source /opt/ros/galactic/setup.bash
-ign gazebo -s shapes.sdf -v 4
+2. Start the behavior tree script
+  ```source /opt/ros/galactic/setup.bash
+   . install/setup.bash 
+   ros2 run scenario_runner spawn_multiple
+```
 
-source /opt/ros/galactic/setup.bash
-. install/setup.bash 
-$ ros2 run scenario_runner spawn_multiple
+3. To open the Gazebo viewer, you need to execute the code in the `gazebo.ipynb` notebook.
+You might need to start the websocket (?):
+```
+os.system('cd /gazebo && nohup ign launch -v 4 websocket.ign &')
+```
 
-
-
-
-https://gazebosim.org/docs/garden/spawn_urdf
-
-gz sim empty.sdf
-source /opt/ros/galactic/setup.bash
-ign gazebo -s shapes.sdf -v 4
-
-
-viewer: gazebo.ipynb
-
+5. For debuggin you can check the list of services and models available in (ign) Gazebo:
+```
 ign service -l
 ign model --list
+```
 
-source /opt/ros/galactic/setup.bash
-
-
-
-    #start websocket 
-    os.system('cd /gazebo && nohup ign launch -v 4 websocket.ign &')
-    
+Official tutorial on how to spawn models in (ignition) Gazebo:
+https://gazebosim.org/docs/garden/spawn_urdf
 
 Service call:
 gz service -s /world/empty/create --reqtype gz.msgs.EntityFactory --reptype gz.msgs.Boolean --timeout 1000 --req 'sdf_filename: "/path/to/model.urdf", name: "urdf_model"'
